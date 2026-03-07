@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Product } from "@/types/product";
 
 interface Props {
@@ -13,13 +14,18 @@ export default function ProductCard({ product }: Props) {
         )
       : 0;
 
+  const imageSrc =
+    product.image?.url || "https://placehold.co/400x300?text=No+Image";
+
   return (
     <Link href={`/product/${product.id}`}>
-      <div className="border rounded-lg p-4 transition hover:shadow-lg">
-        <img
-          src={product.image}
+      <div className="rounded-lg border p-4 transition hover:shadow-lg">
+        <Image
+          src={imageSrc}
           alt={product.title}
-          className="mb-2 h-48 w-full object-cover"
+          width={400}
+          height={300}
+          className="mb-2 h-48 w-full rounded object-cover"
         />
 
         <h2 className="font-semibold">{product.title}</h2>

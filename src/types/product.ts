@@ -8,7 +8,10 @@ export interface Product {
   id: string;
   title: string;
   description: string;
-  image: string;
+  image?: {
+    url: string;
+    alt?: string;
+  };
   price: number;
   discountedPrice: number;
   rating: number;

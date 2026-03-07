@@ -21,8 +21,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
+
+    if (!savedCart) return;
+
+    const parsedCart: unknown = JSON.parse(savedCart);
+
+    if (Array.isArray(parsedCart)) {
+      setCart(parsedCart as CartItem[]);
     }
   }, []);
 
@@ -32,13 +37,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   function addToCart(item: Omit<CartItem, "quantity">) {
     setCart((currentCart) => {
-      const existingItem = currentCart.find((cartItem) => cartItem.id === item.id);
+      const existingItem = currentCart.find(
+        (cartItem) => cartItem.id === item.id,
+      );
 
       if (existingItem) {
         return currentCart.map((cartItem) =>
           cartItem.id === item.id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
+            : cartItem,
         );
       }
 
@@ -53,8 +60,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   function increaseQuantity(id: string) {
     setCart((currentCart) =>
       currentCart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
     );
   }
 
@@ -62,9 +69,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setCart((currentCart) =>
       currentCart
         .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
         )
-        .filter((item) => item.quantity > 0)
+        .filter((item) => item.quantity > 0),
     );
   }
 
@@ -76,7 +83,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const totalPrice = cart.reduce(
     (total, item) => total + item.discountedPrice * item.quantity,
-    0
+    0,
   );
 
   return (

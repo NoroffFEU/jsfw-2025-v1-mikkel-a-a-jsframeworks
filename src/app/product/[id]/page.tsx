@@ -1,24 +1,36 @@
+import Image from "next/image";
 import { getProductById } from "@/lib/api";
 import AddToCartButton from "@/components/AddToCartButton";
 
 interface PageProps {
-  params: Promise<{
-    id: string;
-  }>;
+  params: Promise<{ id: string }>;
 }
 
 export default async function ProductPage({ params }: PageProps) {
   const { id } = await params;
   const product = await getProductById(id);
 
+  const imageSrc =
+    product.image?.url || "https://placehold.co/600x400?text=No+Image";
+
   const hasDiscount = product.discountedPrice < product.price;
+
+  <Image
+    src={imageSrc}
+    alt={product.title}
+    width={600}
+    height={400}
+    className="w-full rounded-lg object-cover"
+  />;
 
   return (
     <main className="mx-auto max-w-5xl p-8">
       <div className="grid gap-8 md:grid-cols-2">
-        <img
-          src={product.image}
+        <Image
+          src={imageSrc}
           alt={product.title}
+          width={600}
+          height={400}
           className="w-full rounded-lg object-cover"
         />
 
@@ -50,7 +62,7 @@ export default async function ProductPage({ params }: PageProps) {
               title: product.title,
               price: product.price,
               discountedPrice: product.discountedPrice,
-              image: product.image,
+              image: imageSrc,
             }}
           />
         </div>
