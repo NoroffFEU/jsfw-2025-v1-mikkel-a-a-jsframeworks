@@ -18,18 +18,18 @@ export default function Home() {
 
   const filteredProducts = useMemo(() => {
     const filtered = products.filter((product) =>
-      product.title.toLowerCase().includes(search.toLowerCase())
+      product.title.toLowerCase().includes(search.toLowerCase()),
     );
 
     if (sortBy === "price-low") {
       return [...filtered].sort(
-        (a, b) => a.discountedPrice - b.discountedPrice
+        (a, b) => a.discountedPrice - b.discountedPrice,
       );
     }
 
     if (sortBy === "price-high") {
       return [...filtered].sort(
-        (a, b) => b.discountedPrice - a.discountedPrice
+        (a, b) => b.discountedPrice - a.discountedPrice,
       );
     }
 
@@ -42,19 +42,14 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
-
       <section className="mb-8 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
-
-        <h1 className="mb-3 text-4xl font-bold tracking-tight">
-          Online Shop
-        </h1>
+        <h1 className="mb-3 text-4xl font-bold tracking-tight">Online Shop</h1>
 
         <p className="mb-6 max-w-2xl text-slate-600">
           Browse products, find deals, and add your favorites to your cart.
         </p>
 
         <div className="grid gap-4 md:grid-cols-[1fr_220px]">
-
           <label className="sr-only" htmlFor="search">
             Search products
           </label>
@@ -85,7 +80,6 @@ export default function Home() {
             <option value="price-high">Price: High to low</option>
             <option value="rating-high">Rating: High to low</option>
           </select>
-
         </div>
       </section>
 
@@ -94,7 +88,6 @@ export default function Home() {
           <ProductCard key={product.id} product={product} />
         ))}
       </section>
-
     </main>
   );
 }

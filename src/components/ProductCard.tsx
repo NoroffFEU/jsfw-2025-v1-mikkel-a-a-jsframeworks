@@ -24,7 +24,7 @@ export default function ProductCard({ product }: Props) {
         <div className="relative">
           <Image
             src={imageSrc}
-            alt={product.title}
+            alt={product.image?.alt || product.title}
             width={400}
             height={300}
             className="h-56 w-full object-cover transition duration-300 group-hover:scale-[1.02]"
@@ -38,7 +38,9 @@ export default function ProductCard({ product }: Props) {
         </div>
 
         <div className="space-y-3 p-4">
-          <h2 className="line-clamp-1 text-lg font-semibold">{product.title}</h2>
+          <h2 className="line-clamp-1 text-lg font-semibold">
+            {product.title}
+          </h2>
 
           <div className="flex items-center gap-2">
             {hasDiscount ? (

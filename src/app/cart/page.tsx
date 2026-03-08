@@ -20,7 +20,7 @@ export default function CartPage() {
 
   return (
     <main className="mx-auto max-w-5xl p-8">
-      <h1 className="mb-6 text-3xl font-bold">Shopping Cart</h1>
+      <h1 className="mb-6 text-3xl font-bold">Your Cart</h1>
 
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>

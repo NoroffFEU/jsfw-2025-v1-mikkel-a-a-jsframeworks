@@ -94,9 +94,7 @@ export default function ContactPage() {
           )}
         </div>
 
-        <button className="rounded bg-black px-5 py-3 text-white">
-          Send
-        </button>
+        <button className="rounded bg-black px-5 py-3 text-white">Send</button>
       </form>
     </main>
   );
